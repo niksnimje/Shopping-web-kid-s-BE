@@ -2,14 +2,15 @@ const mongoose=require("mongoose")
 
 const ProductScheama=new mongoose.Schema({
     title:String,
-    price:Number,
+    price:String,
     img:String,
     description:String,
-    catagory:String,
-    userID:{
-        type:String,
-        required:true
-    }
+    category:String,
+    discount:String
+    // userID:{
+    //     type:String,
+    //     required:true
+    // }
 },{
     timestamps:true,
     versionKey:false

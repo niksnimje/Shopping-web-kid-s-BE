@@ -1,19 +1,19 @@
 const ProductsModel = require("../Model/Product.model");
 
 const productAdd = async (req, res) => {
-    const { title, price,img,catagory,description } = req.body;
-    if (!title || !price || !img ||  !catagory || !description ) {
+    const { title, price,img,category,description,discount } = req.body;
+    if (!title || !price || !img ||  !category || !description || !discount ) {
         return res.status(400).json({ message: "Please Fill all information" });
     }
 
-    const userID = req.user?._id; //optinal chaining
-    if (!userID) {
-        return res.status(401).json({ message: "User not authenticated" });
-    }
-    console.log("Authenticated user ID:", userID);
+    // const userID = req.user?._id; //optinal chaining
+    // if (!userID) {
+    //     return res.status(401).json({ message: "User not authenticated" });
+    // }
+    // console.log("Authenticated user ID:", userID);
 
     try {
-        await ProductsModel.create({ title, price,img,catagory,description, userID });
+        await ProductsModel.create({ title, price,img,category,description,discount });
         return res.status(200).json({ message: "Product Add Successfully" });
     } catch (error) {
         return res.status(400).json({ message: error.message });

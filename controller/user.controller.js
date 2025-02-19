@@ -40,12 +40,17 @@ const singup = async (req, res) => {
         // Generate JWT token
         const token = jwt.sign(
             { userData: { name,email, _id: newUser._id, role: newUser.role } },
-            process.env.PRIVATE_KEY,
-            { expiresIn: "24h" }
+            process.env.PRIVATE_KEY
         );
 
         // Set the token in an HTTP-only cookie
-        res.cookie("verificationToken", token);
+        // res.cookie("verificationToken", token);
+        res.cookie("verificationToken", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 3600000
+        });
 
         // Send success response
         res.status(201).json({
@@ -90,7 +95,12 @@ const singin = async (req, res) => {
                         return res.status(400).json({ message: "Error creating JWT token" });
                     }
 
-                    res.cookie("verificationToken", token);
+                    res.cookie("verificationToken", token, {
+                        httpOnly: true,
+                        secure: process.env.NODE_ENV === 'production',
+                        sameSite: 'strict',
+                        maxAge: 3600000
+                    });
 
                     return res.status(200).json({
                         message: "Login successful!",
