@@ -8,9 +8,9 @@ const productsRouter=express.Router("")
 
 // Post , Delete , Patch , Update 
 
-productsRouter.get("/getproduct",isAuth,getAllProducts)
+productsRouter.get("/getproduct",getAllProducts)
 
-productsRouter.post("/addProducts",isAuth,isAdmin,productAdd)
+productsRouter.post("/addProducts",productAdd)
 
 productsRouter.put("/update/:productID",isAuth,isAdmin,productUpdate)
 
