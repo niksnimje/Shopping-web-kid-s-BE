@@ -5,7 +5,7 @@ const productAdd = async (req, res) => {
     if (!title || !price || !img ||  !category || !description || !discount ) {
         return res.status(400).json({ message: "Please Fill all information" });
     }
-
+    
     // const userID = req.user?._id; //optinal chaining
     // if (!userID) {
     //     return res.status(401).json({ message: "User not authenticated" });
@@ -32,6 +32,21 @@ const getAllProducts = async (req, res) => {
     }
     catch (error) {
         return res.status(400).json({ message: error })
+    }
+}
+
+const getProductsID = async (req, res) => {
+  
+    try {
+        const productId = req.params.productID;
+
+        const product = await ProductsModel.findById(productId); 
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+        res.json(product); 
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
     }
 }
 
@@ -75,4 +90,4 @@ const productDelete = async (req, res) => {
 }
 
 
-module.exports = { productAdd , getAllProducts , productUpdate ,productDelete }
+module.exports = { productAdd , getAllProducts , getProductsID, productUpdate ,productDelete }
