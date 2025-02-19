@@ -14,7 +14,7 @@ productsRouter.get("/getproduct/:productID",getProductsID)
 
 productsRouter.post("/addProducts",productAdd)
 
-productsRouter.put("/update/:productID",isAuth,isAdmin,productUpdate)
+productsRouter.patch("/update/:productID",productUpdate)
 
 productsRouter.delete("/delete/:productID",isAuth,isAdmin,productDelete)
 

@@ -1,8 +1,8 @@
 const ProductsModel = require("../Model/Product.model");
 
 const productAdd = async (req, res) => {
-    const { title, price,img,category,description,discount } = req.body;
-    if (!title || !price || !img ||  !category || !description || !discount ) {
+    const { title, price,realPrice,img,img2,img3,img4,category,description,discount } = req.body;
+    if (!title || !price || !realPrice || !img ||  !category || !description || !discount ) {
         return res.status(400).json({ message: "Please Fill all information" });
     }
     
@@ -13,7 +13,7 @@ const productAdd = async (req, res) => {
     // console.log("Authenticated user ID:", userID);
 
     try {
-        await ProductsModel.create({ title, price,img,category,description,discount });
+        await ProductsModel.create({ title, price,realPrice,img,img2,img3,img4,category,description,discount });
         return res.status(200).json({ message: "Product Add Successfully" });
     } catch (error) {
         return res.status(400).json({ message: error.message });
@@ -59,16 +59,17 @@ const productUpdate=async(req,res)=>{
             return res.status(404).json({ message: "Product Not Found" })
         }
         
-        if (isExistNotes.userID != req.user._id) {
-            return res.status(403).json({ message: "You are not allowed to update this note" })
-        }
+        // if (isExistNotes.userID != req.user.productID) {
+        //     return res.status(403).json({ message: "You are not allowed to update this note" })
+        // }
         
             await ProductsModel.findByIdAndUpdate(productID,req.body)
             res.status(200).json({message:"Product Update SuccessFully"})
 
     }
     catch(error){
-        return res.status(404).json({ message:error })
+        res.status(500).json({message:"Server Error",error:error.message})
+        // return res.status(404).json(error.message)
     }
     
 }
