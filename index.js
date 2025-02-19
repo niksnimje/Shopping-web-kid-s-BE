@@ -12,7 +12,7 @@ const productsRouter = require("./Routes/product.routes");
 
 const app=express()
 app.use(cors({
-    origin: ["http://localhost:5173","http://localhost:3000","https://shopping-web-kid-s-fe.vercel.app","https://shopping-web-kid-s-fe-git-main-niks-nimjes-projects.vercel.app","https://shopping-web-kid-s-bs9108kry-niks-nimjes-projects.vercel.app"],
+    origin: ["http://localhost:5173","http://localhost:3000","https://shopping-web-kid-s-fe.vercel.app","https://shopping-web-kid-s-fe-git-main-niks-nimjes-projects.vercel.app","https://shopping-web-kid-s-bs9108kry-niks-nimjes-projects.vercel.app","https://baby-shop-app.vercel.app","https://baby-shop-app-git-main-niks-nimjes-projects.vercel.app/"],
     credentials: true,
 }))
 app.use(cookieParser());
